@@ -2,6 +2,8 @@ package filter;
 
 import main.java.dto.Record;
 
+import main.java.dto.Record;
+
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.LinkedList;
