@@ -1,7 +1,7 @@
-package main.java.application;
+package application;
 
 
-import main.java.dto.Record;
+import dto.Record;
 
 import java.io.File;
 import java.io.FileNotFoundException;

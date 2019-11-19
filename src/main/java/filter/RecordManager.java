@@ -1,8 +1,8 @@
 package filter;
 
-import main.java.dto.Record;
+import dto.Record;
 
-import main.java.dto.Record;
+import dto.Record;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -20,19 +20,7 @@ public class RecordManager<list> {
 
     }
 
-    Collection<Record> filterOnYear(LocalDate date) {
-
-
-        List<Record>rez=new LinkedList();
-        for(Record record:recordList){
-            record.getYearMonth().getYear();
-
-        }
-
-        return rez;
-
-
-    }
+    Collection<Record> filterOnYear(LocalDate date) { return null;}
 
     Collection<Record> filterOnMonth(LocalDate data) {
         return null;
