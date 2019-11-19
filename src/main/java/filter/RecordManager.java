@@ -1,4 +1,6 @@
-package demo;
+package main.java.filter;
+
+import main.java.dto.Record;
 
 import java.time.LocalDate;
 import java.util.Collection;
