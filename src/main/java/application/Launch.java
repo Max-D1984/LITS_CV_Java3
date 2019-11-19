@@ -21,7 +21,6 @@ public class Launch {
 
         switch (option) {
             case "1":
-              manager.filterOnYear (option);
                  break;
 
             case "2":
