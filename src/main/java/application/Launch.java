@@ -2,6 +2,7 @@ package application;
 
 
 import dto.Record;
+import filter.RecordManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,11 +17,12 @@ public class Launch {
 
         Scanner in = new Scanner(System.in);
         String option = in.nextLine();
-
+        RecordManager manager = new RecordManager();
 
         switch (option) {
             case "1":
-                break;
+              manager.filterOnYear (null);
+                 break;
 
             case "2":
                 break;
