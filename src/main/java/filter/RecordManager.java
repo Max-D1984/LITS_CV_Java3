@@ -1,4 +1,6 @@
-package main.java.filter;
+package filter;
+
+import main.java.dto.Record;
 
 import main.java.dto.Record;
 

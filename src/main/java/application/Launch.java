@@ -4,6 +4,7 @@ package main.java.application;
 import main.java.dto.Record;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,38 +12,29 @@ import java.util.Scanner;
 public class Launch {
 
 
-    public static List<Record> getFileLines(String fileName) {
-        List<Record> recordList = new ArrayList<>();
-        File myObj = new File(fileName);
+    public static void main(String[] args) {
+
         Scanner in = new Scanner(System.in);
         String option = in.nextLine();
 
 
         switch (option) {
-            case 1:
+            case "1":
                 break;
 
-            case 2:
+            case "2":
                 break;
 
-            case 3:
+            case "3":
                 break;
 
-            case 4:
+            case "4":
                 break;
 
-            case 5:
+            case "5":
             default:
         }
 
 
-        try {
-
-            myReader.close();
-        } catch () {
-            System.out.println("An error occured.");
-            return null;
-        }
-        return recordList;
     }
 }
