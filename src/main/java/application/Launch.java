@@ -1,5 +1,8 @@
 package main.java.application;
 
+
+import main.java.dto.Record;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
