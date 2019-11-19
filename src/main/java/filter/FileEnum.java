@@ -1,4 +1,4 @@
-package main.java.filter;
+package filter;
 
 public enum FileEnum {
 
