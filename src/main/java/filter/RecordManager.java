@@ -40,17 +40,17 @@ public class RecordManager {
 
     }
 
-    Collection<Record> filterOnYear(LocalDate date) { return null;}
+   public Collection<Record> filterOnYear(LocalDate date) { return null;}
 
-    Collection<Record> filterOnMonth(LocalDate data) {
+   public Collection<Record> filterOnMonth(LocalDate data) {
         return null;
     }
 
-    Collection<Record> filterOnDistrict(LocalDate data) {
+   public Collection<Record> filterOnDistrict(LocalDate data) {
         return null;
     }
 
-    Collection<Record> filterOnQuarter(LocalDate data) {
+   public Collection<Record> filterOnQuarter(LocalDate data) {
         return null;
     }
 }
