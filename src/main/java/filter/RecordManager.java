@@ -24,7 +24,7 @@ public class RecordManager {
                 }
 
                 //отримуємо стрічку, розбиваємої на складові, і заносимо всі поля в масив line
-                List<String> line = getParsedString(myReader.nextLine());
+                List<String > line = getParsedString(myReader.nextLine());
                 //перетворюємо стрічку в першому полі в формат (виклик методу getLocalDate() ) LocalDate і заносимо значення в змінну myDate
                 LocalDate myDate = getLocalDate(line.get(0));
                 //по другому полю вибираємо з перерахунку District область (виклик методу getDistrict()) і заносимо в змінну myDistrict
@@ -59,8 +59,16 @@ public class RecordManager {
         return null;
     }
 
-    public Collection<Record> filterOnDistrict(LocalDate data) {
-        return null;
+    public Collection<Record> filterOnDistrict(District district) {
+        List<Record> districtFilter = new LinkedList();
+        for(Record rec: recordList){
+            if(district.equals(rec.getRegion())){
+                districtFilter.add(rec);
+            }else{
+                continue;
+            }
+        }
+        return districtFilter;
     }
 
     public Collection<Record> filterOnQuarter(LocalDate data, int quarter) {
