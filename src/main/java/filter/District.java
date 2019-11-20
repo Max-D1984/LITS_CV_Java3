@@ -9,7 +9,7 @@ public enum District {
     POLTAVA_OBLAST("Полтавська"),
     KHERSON_OBLAST("Херсонська"),
     KIEV_OBLAST("Київська"),
-    ZAPORIZHIA_OBLAST("Зарорізька"),
+    ZAPORIZHIA_OBLAST("Запорізька"),
     LUHANSK_OBLAST("Луганська"),
     DONETSK_OBLAST("Донецька"),
     VINNYTSIA_OBLAST("Вінницька"),
