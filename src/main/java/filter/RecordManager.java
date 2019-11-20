@@ -43,6 +43,10 @@ public class RecordManager {
     }
 
     public void printRecords(Collection<Record> records) {
+        for (Record rec:records) {
+            System.out.println(rec.toString());
+
+        }
 
     }
 
