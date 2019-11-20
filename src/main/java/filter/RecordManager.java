@@ -24,7 +24,7 @@ public class RecordManager {
                 }
 
                 //отримуємо стрічку, розбиваємої на складові, і заносимо всі поля в масив line
-                List<String > line = getParsedString(myReader.nextLine());
+                List<String> line = getParsedString(myReader.nextLine());
                 //перетворюємо стрічку в першому полі в формат (виклик методу getLocalDate() ) LocalDate і заносимо значення в змінну myDate
                 LocalDate myDate = getLocalDate(line.get(0));
                 //по другому полю вибираємо з перерахунку District область (виклик методу getDistrict()) і заносимо в змінну myDistrict
@@ -39,11 +39,6 @@ public class RecordManager {
 
         } catch (FileNotFoundException e) {
             System.out.println("An error occured.");
-        }
-        for (Record rec : recordList
-        ) {
-            System.out.println(rec.toString());
-
         }
     }
 
@@ -61,18 +56,46 @@ public class RecordManager {
 
     public Collection<Record> filterOnDistrict(District district) {
         List<Record> districtFilter = new LinkedList();
-        for(Record rec: recordList){
-            if(district.equals(rec.getRegion())){
+        for (Record rec : recordList) {
+            if (district.equals(rec.getRegion())) {
                 districtFilter.add(rec);
-            }else{
+            } else {
                 continue;
             }
         }
         return districtFilter;
     }
 
-    public Collection<Record> filterOnQuarter(LocalDate data, int quarter) {
-        return null;
+    public Collection<Record> filterOnQuarter(int quarter) {
+        List<Record> quarterFilter = new LinkedList<>();
+        int start=0;
+        int end=0;
+        switch (quarter) {
+            case 1:
+                start = 1;
+                end = 3;
+                break;
+            case 2:
+                start = 4;
+                end = 6;
+                break;
+            case 3:
+                start = 7;
+                end = 9;
+                break;
+            case 4:
+                start = 10;
+                end = 12;
+                break;
+        }
+        for (Record rec : recordList
+        ) {
+            if (rec.getYearMonthDay().getMonthValue() >= start && rec.getYearMonthDay().getMonthValue() <= end) {
+               quarterFilter.add(rec);
+            }
+
+        }
+        return quarterFilter;
     }
 
     //---------------------------------------------------
@@ -123,7 +146,7 @@ public class RecordManager {
             case "Київська":
                 returnDistrict = District.KIEV_OBLAST;
                 break;
-            case "Зарорізька":
+            case "Запорізька":
                 returnDistrict = District.ZAPORIZHIA_OBLAST;
                 break;
             case "Луганська":
