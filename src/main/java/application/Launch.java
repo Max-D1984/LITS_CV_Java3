@@ -6,6 +6,7 @@ import filter.RecordManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,10 +21,11 @@ public class Launch {
             System.out.println("Choose the filter: ");
             first = in.nextLine();
             switch (first) {
-                case "1": {
+                case "1":
                     System.out.println("You did select the filter on Year!");
-                }
-                break;
+                    System.out.println("Please enter Year:");
+                    filterOnYear(in.nextLine());
+                    break;
                 case "2":
                     System.out.println("You did select the filter on Month!");
                     break;
@@ -67,4 +69,13 @@ public class Launch {
 
 
     }
+
+    private static void filterOnYear(String enteredYear) {
+
+        System.out.println("selected Year " + enteredYear);
+
+
+    }
+
+
 }
