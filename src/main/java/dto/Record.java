@@ -3,6 +3,7 @@ package dto;
 import filter.District;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Record {
 
@@ -14,6 +15,21 @@ public class Record {
         this.yearMonthDay = yearMonthDay;
         this.region = region;
         this.registrationCount = registrationCount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Record record = (Record) o;
+        return yearMonthDay.equals(record.yearMonthDay) &&
+                region == record.region &&
+                registrationCount.equals(record.registrationCount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(yearMonthDay, region, registrationCount);
     }
 
     public LocalDate getYearMonthDay() {
@@ -31,10 +47,6 @@ public class Record {
 
     @Override
     public String toString() {
-        return "Record{" +
-                "yearMonthDay=" + yearMonthDay +
-                ", region=" + region +
-                ", registrationCount=" + registrationCount +
-                '}';
+        return  yearMonthDay + ", " + region + ", " + registrationCount;
     }
 }
