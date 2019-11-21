@@ -14,9 +14,11 @@ import java.util.Scanner;
 
 public class Launch {
     private static boolean countinueAsking = true;
-
+    static RecordManager recordManager = new RecordManager();
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+
+        recordManager.readFile("data.csv");
         while (countinueAsking) {
             defineFilters(in);
         }
@@ -26,6 +28,7 @@ public class Launch {
     }
 
     private static void defineFilters(Scanner in) {
+
         String first;
         System.out.println("Choose the filter: ");
         first = in.nextLine();
@@ -42,6 +45,8 @@ public class Launch {
 
             case "3":
                 System.out.println("You did select the filter on District");
+                System.out.println("Please enter District:");
+                filterOnDistrict(in.nextLine());
                 break;
 
             case "4":
@@ -58,10 +63,11 @@ public class Launch {
 
     private static void filterOnYear(String enteredYear) {
 
-        System.out.println("selected Year " + enteredYear);
-
-
+        System.out.println("Selected Year " + enteredYear);
     }
-
+    private static void filterOnDistrict(String district){
+        System.out.println("Selected District " + district);
+        recordManager.filterOnDistrict(District.getDistrict(district));
+    }
 
 }
