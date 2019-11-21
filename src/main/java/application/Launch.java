@@ -72,6 +72,10 @@ public class Launch {
     private static void filterOnYear(String enteredYear) {
 
         System.out.println("Selected Year " + enteredYear);
+        int year = Integer.parseInt(enteredYear);
+        LocalDate localDate =  LocalDate.of( year ,1, 1);
+        Collection<Record> records = recordManager.filterOnYear(localDate);
+        recordManager.printRecords(records);
     }
     private static void filterOnDistrict(String districtName){
         System.out.println("Selected District " + districtName);
