@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Launch {
-    private static boolean countinueAsking = true;
+    private static boolean goOnAsking = true;
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        while (countinueAsking) {
+        while (goOnAsking) {
             defineFilters(in);
         }
 
@@ -38,6 +38,8 @@ public class Launch {
                 break;
             case "2":
                 System.out.println("You did select the filter on Month!");
+                System.out.println("Please enter Month:");
+                filterOnMonth(in.nextLine());
                 break;
 
             case "3":
@@ -49,11 +51,15 @@ public class Launch {
                 break;
 
             case "0":
-                countinueAsking = false;
+                goOnAsking = false;
                 System.out.println("Thanks for using our program");
                 break;
         }
 
+    }
+    private static void filterOnMonth(String enteredMonth) {
+
+        System.out.println("selected Month " + enteredMonth);
     }
 
     private static void filterOnYear(String enteredYear) {
