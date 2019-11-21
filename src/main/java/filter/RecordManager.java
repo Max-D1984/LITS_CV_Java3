@@ -70,24 +70,29 @@ public class RecordManager {
         return yearFilter;
     }
 
-
+    // метод фільтрації по місяцям.
     public Collection<Record> filterOnMonth(LocalDate data) {
+        // Створюємо колекцію, яка зберігатиме інформацію по якому місяцю відбуваеться фільтрація
         List<Record> monthFilter = new LinkedList<>();
-        for (Record save : recordList) {
+        // Цикл for, який проходить по значеннях реєстру, де змінна save приймає відповідні значення
+        for (Record singleLine : recordList) {
+            // Створюємо цілочисленну змінну та присвоюємо їй значення місяця з аргументу data,який є аргументом методу.
             int x = data.getMonthValue();
-            if (save.getYearMonthDay().getMonthValue() == x) {
-                monthFilter.add(save);
+            // умова виконання if:
+            // виконується порівняння місця зі списку з зазначеним параметром у фільтрі
+            if (singleLine.getYearMonthDay().getMonthValue() == x) {
+                monthFilter.add(singleLine);
             }
         }
+        //метод повертає заповнену колекцію filterOnMonth із відфільтрованими реєстрами по заданій області.
         return monthFilter;
     }
-
 
     //метод фільтрації по областям, який повертає змінну типу Collection<Record>, в параметр отримує значення області district
     public Collection<Record> filterOnDistrict(District district) {
         //Створюємо колекцію, котра буде зберігати інформацію про ті реєстри, по чиїй області відбувається фільтрація
         List<Record> districtFilter = new LinkedList();
-        //В циклі foreach проходимось по всіх значеннях реєстрів, на кожній ітерації зміння rec типу Record
+        //В циклі foreach проходимось по всіх значеннях реєстрів, на кожній ітерації змінна rec типу Record
         //приймає значення відповідної реєстрації
         for (Record rec : recordList) {
             //Умова виконання if:
