@@ -13,61 +13,46 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Launch {
-
+    private static boolean countinueAsking = true;
 
     public static void main(String[] args) {
-        String first = "";
         Scanner in = new Scanner(System.in);
-        while (!first.equals("0")) {
-            System.out.println("Choose the filter: ");
-            first = in.nextLine();
-            switch (first) {
-                case "1":
-                    System.out.println("You did select the filter on Year!");
-                    System.out.println("Please enter Year:");
-                    filterOnYear(in.nextLine());
-                    break;
-                case "2":
-                    System.out.println("You did select the filter on Month!");
-                    break;
-
-                case "3":
-                    System.out.println("You did select the filter on District");
-                    break;
-
-                case "4":
-                    System.out.println("You did select the filter on Quarter");
-                    break;
-
-                case "0":
-                    System.out.println("Good Bye ");
-                    break;
-            }
-            //System.out.println(first);
+        while (countinueAsking) {
+            defineFilters(in);
         }
 
 
 
-   /*     String option = in.nextLine();
-        RecordManager manager = new RecordManager();
+    }
 
-        switch (option) {
+    private static void defineFilters(Scanner in) {
+        String first;
+        System.out.println("Choose the filter: ");
+        first = in.nextLine();
+
+        switch (first) {
             case "1":
-                 break;
-
+                System.out.println("You did select the filter on Year!");
+                System.out.println("Please enter Year:");
+                filterOnYear(in.nextLine());
+                break;
             case "2":
+                System.out.println("You did select the filter on Month!");
                 break;
 
             case "3":
+                System.out.println("You did select the filter on District");
                 break;
 
             case "4":
+                System.out.println("You did select the filter on Quarter");
                 break;
 
-            case "5":
-            default:
-        } */
-
+            case "0":
+                countinueAsking = false;
+                System.out.println("Thanks for using our program");
+                break;
+        }
 
     }
 
