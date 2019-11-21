@@ -67,6 +67,10 @@ public class Launch {
     private static void filterOnMonth(String enteredMonth) {
 
         System.out.println("selected Month " + enteredMonth);
+        int month = Integer.parseInt(enteredMonth);
+        LocalDate localDate =  LocalDate.of( 0,month, 1);
+        Collection<Record> records = recordManager.filterOnMonth(localDate);
+        recordManager.printRecords(records);
     }
 
     private static void filterOnYear(String enteredYear) {
