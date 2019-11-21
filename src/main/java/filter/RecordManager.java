@@ -53,9 +53,23 @@ public class RecordManager {
 
     }
 
-    public Collection<Record> filterOnYear(LocalDate date) {
-        return null;
+    public Collection<Record> filterOnYear(LocalDate localDate) {
+        List<Record> yearFilter = new LinkedList<>();
+
+        for (Record rec : recordList) {
+            int y = localDate.getYear();
+            if (rec.getYearMonthDay().getYear() == y) {
+                yearFilter.add(rec);
+            }
+
+        }
+        for (Record rec1: yearFilter){
+            System.out.println(rec1.toString());
+        }
+
+        return yearFilter;
     }
+
 
     public Collection<Record> filterOnMonth(LocalDate data) {
         return null;
