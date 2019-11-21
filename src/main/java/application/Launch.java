@@ -62,7 +62,7 @@ public class Launch {
 
                 case 0:
                     goOnAsking = false;
-                    System.out.println("Thanks for using our program");
+                    System.out.println("Thanks for using our program!");
                     break;
                 default:
                     System.out.println("Incorrect number of option!");
