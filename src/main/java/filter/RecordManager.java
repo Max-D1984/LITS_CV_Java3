@@ -63,7 +63,7 @@ public class RecordManager {
             }
 
         }
-        for (Record rec1: yearFilter){
+        for (Record rec1 : yearFilter) {
             System.out.println(rec1.toString());
         }
 
@@ -72,7 +72,14 @@ public class RecordManager {
 
 
     public Collection<Record> filterOnMonth(LocalDate data) {
-        return null;
+        List<Record> monthFilter = new LinkedList<>();
+        for (Record save : recordList) {
+            int x = data.getMonthValue();
+            if (save.getYearMonthDay().getMonthValue() == x) {
+                monthFilter.add(save);
+            }
+        }
+        return monthFilter;
     }
 
 
