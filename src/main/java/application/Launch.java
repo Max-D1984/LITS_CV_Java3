@@ -2,6 +2,7 @@ package application;
 
 
 import dto.Record;
+import filter.District;
 import filter.RecordManager;
 
 import java.io.File;
