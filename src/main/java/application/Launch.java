@@ -27,17 +27,18 @@ public class Launch {
     }
 
     private static void defineFilters(Scanner in) {
-
+        Scanner sc = new Scanner(System.in);
         int first;
         System.out.println("Your option are: ");
         System.out.println("1 - filter on Year;");
         System.out.println("2 - filter on Month;");
         System.out.println("3 - filter on District;");
-        System.out.println("4 - filter on Quarter.");
+        System.out.println("4 - filter on Quarter;");
+        System.out.println("0 - exit the program.");
         System.out.println("Choose the filter: ");
 
         try {
-            first = in.nextInt();
+            first = sc.nextInt();
             switch (first) {
                 case 1:
                     System.out.println("You did select the filter on Year!");
