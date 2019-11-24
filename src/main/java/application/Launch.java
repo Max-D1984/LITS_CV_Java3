@@ -102,12 +102,14 @@ public class Launch {
         LocalDate localDate = LocalDate.of(0, month, 1);
         Collection<Record> records = recordManager.filterOnMonth(localDate);
         recordManager.printRecords(records);
+        printTOFile(records);
     }
     private static void filterOnQuarter (String enteredQuarter) {
         System.out.println("Selected Quarter " + enteredQuarter);
         int quarter = Integer.parseInt(enteredQuarter);
         Collection<Record> records = recordManager.filterOnQuarter(quarter);
         recordManager.printRecords(records);
+        printTOFile(records);
     }
     private static void filterOnYear(String enteredYear) {
 
@@ -116,12 +118,23 @@ public class Launch {
         LocalDate localDate = LocalDate.of(year, 1, 1);
         Collection<Record> records = recordManager.filterOnYear(localDate);
         recordManager.printRecords(records);
+        printTOFile(records);
     }
 
     private static void filterOnDistrict(String districtName) {
         System.out.println("Selected District " + districtName);
         Collection<Record> records = recordManager.filterOnDistrict(District.getDistrict(districtName));
         recordManager.printRecords(records);
+        printTOFile(records);
+    }
+
+    private static void printTOFile(Collection<Record> records){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Do you want to write into a file? (y/n)");
+        if(in.nextLine().equals("y")){
+            System.out.println("strat to creating a file");
+            recordManager.recordsToFile(records);
+        }
     }
 
     private static boolean isDistrict(String district) {
