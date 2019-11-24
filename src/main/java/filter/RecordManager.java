@@ -188,6 +188,7 @@ public class RecordManager {
 
             }
             //закриваємо файл
+            System.out.println("File was created");
             writer.close();
         } catch (Exception ex) {
             System.out.println("Failed to write file");
