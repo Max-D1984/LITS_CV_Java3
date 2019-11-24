@@ -76,7 +76,7 @@ public class Launch {
                         }else if(strQuarter.equals("0")){
                             quarterCheck= true;
                         }else{
-                            System.out.println("You input wrong quarter. please repeat please or input 0 to go back:");
+                            System.out.println("You input wrong quarter. please repeat or input 0 to go back:");
                         }
 
                     }
