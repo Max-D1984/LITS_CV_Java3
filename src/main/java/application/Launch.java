@@ -65,6 +65,7 @@ public class Launch {
                     break;
                 case 4:
                     System.out.println("You did select the filter on Quarter");
+                    filterOnQuarter(in.nextLine());
                     break;
                 case 0:
                     goOnAsking = false;
@@ -88,7 +89,12 @@ public class Launch {
         Collection<Record> records = recordManager.filterOnMonth(localDate);
         recordManager.printRecords(records);
     }
-
+    private static void filterOnQuarter (String enteredQuarter) {
+        System.out.println("Selected Quarter " + enteredQuarter);
+        int quarter = Integer.parseInt(enteredQuarter);
+        Collection<Record> records = recordManager.filterOnQuarter(quarter);
+        recordManager.printRecords(records);
+    }
     private static void filterOnYear(String enteredYear) {
 
         System.out.println("Selected Year " + enteredYear);
