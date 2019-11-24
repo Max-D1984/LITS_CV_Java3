@@ -65,6 +65,7 @@ public class Launch {
                     break;
                 case 4:
                     System.out.println("You did select the filter on Quarter");
+                    System.out.println("Please enter Quartet(1, 2, 3, 4):");
                     filterOnQuarter(in.nextLine());
                     break;
                 case 0:
