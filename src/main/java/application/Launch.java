@@ -23,7 +23,6 @@ public class Launch {
         }
 
 
-
     }
 
     private static void defineFilters(Scanner in) {
@@ -50,17 +49,23 @@ public class Launch {
                     System.out.println("Please enter Month:");
                     filterOnMonth(in.nextLine());
                     break;
-
                 case 3:
                     System.out.println("You did select the filter on District");
                     System.out.println("Please enter District:");
-                    filterOnDistrict(in.nextLine());
+                    String strDistrict = " ";
+                    while (!isDistrict(strDistrict)) {
+                        strDistrict = in.nextLine();
+                        if (isDistrict(strDistrict)) {
+                            break;
+                        } else {
+                            System.out.println("You input wrong name of District. Repeat please:");
+                        }
+                    }
+                    filterOnDistrict(strDistrict);
                     break;
-
                 case 4:
                     System.out.println("You did select the filter on Quarter");
                     break;
-
                 case 0:
                     goOnAsking = false;
                     System.out.println("Thanks for using our program!");
@@ -68,22 +73,18 @@ public class Launch {
                 default:
                     System.out.println("Incorrect number of option!");
                     System.out.println();
-
             }
-        }catch(InputMismatchException ex){
+        } catch (InputMismatchException ex) {
             System.out.println("You need to input numerical value");
             System.out.println();
         }
-
-
-
-
     }
+
     private static void filterOnMonth(String enteredMonth) {
 
         System.out.println("selected Month " + enteredMonth);
         int month = Integer.parseInt(enteredMonth);
-        LocalDate localDate =  LocalDate.of( 0,month, 1);
+        LocalDate localDate = LocalDate.of(0, month, 1);
         Collection<Record> records = recordManager.filterOnMonth(localDate);
         recordManager.printRecords(records);
     }
@@ -92,15 +93,24 @@ public class Launch {
 
         System.out.println("Selected Year " + enteredYear);
         int year = Integer.parseInt(enteredYear);
-        LocalDate localDate =  LocalDate.of( year ,1, 1);
+        LocalDate localDate = LocalDate.of(year, 1, 1);
         Collection<Record> records = recordManager.filterOnYear(localDate);
         recordManager.printRecords(records);
     }
 
-    private static void filterOnDistrict(String districtName){
+    private static void filterOnDistrict(String districtName) {
         System.out.println("Selected District " + districtName);
         Collection<Record> records = recordManager.filterOnDistrict(District.getDistrict(districtName));
         recordManager.printRecords(records);
+    }
+
+    private static boolean isDistrict(String district) {
+        for (District dist : District.values()) {
+            if (district.equals(dist.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

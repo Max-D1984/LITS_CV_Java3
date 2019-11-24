@@ -29,6 +29,10 @@ public enum District {
     AR_KRYM("АР Крим"),
     SEVASTOPOL("Севастополь");
 
+    public String getName() {
+        return name;
+    }
+
     private String name;
 
     District(String name) {
