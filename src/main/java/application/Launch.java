@@ -66,7 +66,20 @@ public class Launch {
                 case 4:
                     System.out.println("You did select the filter on Quarter");
                     System.out.println("Please enter Quartet(1, 2, 3, 4):");
-                    filterOnQuarter(in.nextLine());
+                    boolean quarterCheck=false;
+                    String strQuarter="";
+                    while(!quarterCheck) {
+                        strQuarter = in.nextLine();
+                        if(strQuarter.equals("1")||strQuarter.equals("2")||strQuarter.equals("3")||strQuarter.equals("4")){
+                            filterOnQuarter(strQuarter);
+                            quarterCheck= true;
+                        }else if(strQuarter.equals("0")){
+                            quarterCheck= true;
+                        }else{
+                            System.out.println("You input wrong quarter. please repeat please or input 0 to go back:");
+                        }
+
+                    }
                     break;
                 case 0:
                     goOnAsking = false;
