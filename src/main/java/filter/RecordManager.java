@@ -15,7 +15,7 @@ public class RecordManager {
 
     public void readFile(String fileName) {
         File myFile = new File(fileName);
-        Scanner myReader = null;
+        Scanner myReader;
         try {
             boolean isFirst = true;
             myReader = new Scanner(myFile);
@@ -152,13 +152,11 @@ public class RecordManager {
         //створюємо екземпляр класу File і одразу вносимо назву файлу який будемо створювати і записувати
         File myFile = new File(LocalDateTime.now().format(formatterFileName) + ".csv");
         //екземпляр класу FileWriter для запису в файл
-        FileWriter writer = null;
 
-        try {
+
+        try (FileWriter writer = new FileWriter(myFile)){
             //створюємо файл
             myFile.createNewFile();
-            //задаємо writer'у працювати з нашим файлом
-            writer = new FileWriter(myFile);
             //змінна логічного типу для визначення чи перший запис для формування назв стовпчиків
             boolean isFirst = true;
             //змінна для визначення кінцевої стрічки для того щоб не ставити перевід каретки "n"
@@ -185,11 +183,8 @@ public class RecordManager {
                     //якщо ні, то переводимо каретку (робимо абзац)
                     writer.write("\n");
                 }
-
             }
-            //закриваємо файл
             System.out.println("File was created");
-            writer.close();
         } catch (Exception ex) {
             System.out.println("Failed to write file");
         }
