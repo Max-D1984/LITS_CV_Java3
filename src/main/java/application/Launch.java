@@ -42,7 +42,22 @@ public class Launch {
                 case 1:
                     System.out.println("You did select the filter on Year!");
                     System.out.println("Please enter Year:");
-                    filterOnYear(in.nextLine());
+                    String strYear = "";
+                    boolean checkYear = false;
+                    while (!checkYear) {
+                        strYear = in.nextLine();
+                        if (strYear.equals("0")) {
+                            checkYear = true;
+                        } else if (isYear(strYear)) {
+                            System.out.println("You did select the next year: " + strYear);
+                            filterOnYear(strYear);
+                            checkYear = true;
+                        } else {
+                            System.out.println("You did select wrong year, " +
+                                    "please try again or entered 0 for exit: ");
+                        }
+                    }
+
                     break;
                 case 2:
                     System.out.println("You did select the filter on Month!");
@@ -110,7 +125,6 @@ public class Launch {
         }
     }
 
-
     private static void filterOnMonth(String enteredMonth) {
 
         System.out.println("selected Month " + enteredMonth);
@@ -170,7 +184,16 @@ public class Launch {
             if (enteredMonth.equals(month)) {
                 return true;
             }
+        }
+        return false;
+    }
 
+    private static boolean isYear(String enteredYear) {
+        String[] numberOfYear = {"2013", "2014", "2015", "2016", "2017", "2018", "2019"};
+        for (String year : numberOfYear) {
+            if (enteredYear.equals(year)) {
+                return true;
+            }
         }
         return false;
     }
