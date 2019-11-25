@@ -5,27 +5,23 @@ import dto.Record;
 import filter.District;
 import filter.RecordManager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.*;
 
 public class Launch {
     private static boolean goOnAsking = true;
-    static RecordManager recordManager = new RecordManager();
+    private static RecordManager recordManager = new RecordManager();
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
         recordManager.readFile("data.csv");
         while (goOnAsking) {
-            defineFilters(in);
+            defineFilters();
         }
 
 
     }
 
-    private static void defineFilters(Scanner in) {
+    private static void defineFilters() {
         Scanner sc = new Scanner(System.in);
         int first;
         System.out.println("Your option are: ");
@@ -42,74 +38,22 @@ public class Launch {
                 case 1:
                     System.out.println("You did select the filter on Year!");
                     System.out.println("Please enter Year:");
-                    String strYear = "";
-                    boolean checkYear = false;
-                    while (!checkYear) {
-                        strYear = in.nextLine();
-                        if (strYear.equals("0")) {
-                            checkYear = true;
-                        } else if (isYear(strYear)) {
-                            System.out.println("You did select the next year: " + strYear);
-                            filterOnYear(strYear);
-                            checkYear = true;
-                        } else {
-                            System.out.println("You did select wrong year, " +
-                                    "please try again or entered 0 for exit: ");
-                        }
-                    }
-
+                    isYear();
                     break;
                 case 2:
                     System.out.println("You did select the filter on Month!");
                     System.out.println("Please enter Month:");
-                    String strMonth = " ";
-                    boolean checkMonth = false;
-                    while (!checkMonth) {
-                        strMonth = in.nextLine();
-                        if (strMonth.equals("0")) {
-                            checkMonth = true;
-                        } else if (isMonth(strMonth)) {
-                            System.out.println("You did select the next month " + strMonth);
-                            filterOnMonth(strMonth);
-                            checkMonth = true;
-                        } else {
-                            System.out.println("You did select wrong type of month, " +
-                                    "please try again or entered 0 for exit: ");
-                        }
-                    }
-
+                    isMonth();
                     break;
                 case 3:
                     System.out.println("You did select the filter on District");
                     System.out.println("Please enter District:");
-                    String strDistrict = " ";
-                    while (!isDistrict(strDistrict)) {
-                        strDistrict = in.nextLine();
-                        if (isDistrict(strDistrict)) {
-                            break;
-                        } else {
-                            System.out.println("You input wrong name of District. Repeat please:");
-                        }
-                    }
-                    filterOnDistrict(strDistrict);
+                    isDistrict();
                     break;
                 case 4:
                     System.out.println("You did select the filter on Quarter");
                     System.out.println("Please enter Quartet(1, 2, 3, 4):");
-                    boolean quarterCheck = false;
-                    String strQuarter = "";
-                    while (!quarterCheck) {
-                        strQuarter = in.nextLine();
-                        if (strQuarter.equals("1") || strQuarter.equals("2") || strQuarter.equals("3") || strQuarter.equals("4")) {
-                            filterOnQuarter(strQuarter);
-                            quarterCheck = true;
-                        } else if (strQuarter.equals("0")) {
-                            quarterCheck = true;
-                        } else {
-                            System.out.println("You input wrong quarter. please repeat or input 0 to go back:");
-                        }
-
-                    }
+                    isQuarter();
                     break;
                 case 0:
                     goOnAsking = false;
@@ -169,33 +113,104 @@ public class Launch {
         }
     }
 
-    private static boolean isDistrict(String district) {
-        for (District dist : District.values()) {
-            if (district.equals(dist.getName())) {
-                return true;
+    private static void isDistrict() {
+        Scanner in = new Scanner(System.in);
+        boolean checkDistrict = false;
+        String strDistrict;
+        while (!checkDistrict) {
+            strDistrict = in.nextLine();
+            if (strDistrict.equals("0")) {
+                checkDistrict = true;
+            } else {
+                for (District dist : District.values()) {
+                    if (strDistrict.equals(dist.getName())) {
+                        checkDistrict = true;
+                        break;
+                    }
+                }
+                if (checkDistrict) {
+                    System.out.println("You did select the next district " + strDistrict);
+                    filterOnDistrict(strDistrict);
+                    break;
+                } else {
+                    System.out.println("You input wrong name of District. please repeat or enter 0 to exit:");
+                }
             }
         }
-        return false;
     }
 
-    private static boolean isMonth(String enteredMonth) {
+    private static void isMonth() {
+        Scanner in = new Scanner(System.in);
         String[] numberOfMonth = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        for (String month : numberOfMonth) {
-            if (enteredMonth.equals(month)) {
-                return true;
+        String strMonth;
+        boolean checkMonth = false;
+        while (!checkMonth) {
+            strMonth = in.nextLine();
+            if (strMonth.equals("0")) {
+                checkMonth = true;
+            } else {
+                for (String month : numberOfMonth) {
+                    if (strMonth.equals(month)) {
+                        checkMonth = true;
+                        break;
+                    }
+                }
+                if (checkMonth) {
+                    System.out.println("You did select the next month " + strMonth);
+                    filterOnMonth(strMonth);
+                    checkMonth = true;
+                } else {
+                    System.out.println("You did select wrong type of month, " +
+                            "please try again or entered 0 for exit: ");
+                }
             }
         }
-        return false;
     }
 
-    private static boolean isYear(String enteredYear) {
+    private static void isYear() {
+        Scanner in = new Scanner(System.in);
         String[] numberOfYear = {"2013", "2014", "2015", "2016", "2017", "2018", "2019"};
-        for (String year : numberOfYear) {
-            if (enteredYear.equals(year)) {
-                return true;
+        String strYear;
+        boolean checkYear = false;
+        while (!checkYear) {
+            strYear = in.nextLine();
+            if (strYear.equals("0")) {
+                checkYear = true;
+            } else {
+                for (String year : numberOfYear) {
+                    if (strYear.equals(year)) {
+                        checkYear = true;
+                        break;
+                    }
+                }
+                if (checkYear) {
+                    System.out.println("You did select the next year: " + strYear);
+                    filterOnYear(strYear);
+                } else {
+                    System.out.println("You did select wrong year, " +
+                            "please try again or entered 0 for exit: ");
+                }
             }
         }
-        return false;
+    }
+
+
+    private static void isQuarter() {
+        Scanner in = new Scanner(System.in);
+        boolean quarterCheck = false;
+        String strQuarter;
+        while (!quarterCheck) {
+            strQuarter = in.nextLine();
+            if (strQuarter.equals("1") || strQuarter.equals("2") || strQuarter.equals("3") || strQuarter.equals("4")) {
+                filterOnQuarter(strQuarter);
+                quarterCheck = true;
+            } else if (strQuarter.equals("0")) {
+                quarterCheck = true;
+            } else {
+                System.out.println("You input wrong quarter. please repeat or input 0 to go back:");
+            }
+
+        }
     }
 
 }
