@@ -47,7 +47,22 @@ public class Launch {
                 case 2:
                     System.out.println("You did select the filter on Month!");
                     System.out.println("Please enter Month:");
-                    filterOnMonth(in.nextLine());
+                    String strMonth = " ";
+                    boolean checkMonth = false;
+                    while (!checkMonth) {
+                        strMonth = in.nextLine();
+                        if (strMonth.equals("0")) {
+                            checkMonth = true;
+                        } else if (isMonth(strMonth)) {
+                            System.out.println("You did select the next month " + strMonth);
+                            filterOnMonth(strMonth);
+                            checkMonth = true;
+                        } else {
+                            System.out.println("You did select wrong type of month, " +
+                                    "please try again or entered 0 for exit: ");
+                        }
+                    }
+
                     break;
                 case 3:
                     System.out.println("You did select the filter on District");
@@ -66,16 +81,16 @@ public class Launch {
                 case 4:
                     System.out.println("You did select the filter on Quarter");
                     System.out.println("Please enter Quartet(1, 2, 3, 4):");
-                    boolean quarterCheck=false;
-                    String strQuarter="";
-                    while(!quarterCheck) {
+                    boolean quarterCheck = false;
+                    String strQuarter = "";
+                    while (!quarterCheck) {
                         strQuarter = in.nextLine();
-                        if(strQuarter.equals("1")||strQuarter.equals("2")||strQuarter.equals("3")||strQuarter.equals("4")){
+                        if (strQuarter.equals("1") || strQuarter.equals("2") || strQuarter.equals("3") || strQuarter.equals("4")) {
                             filterOnQuarter(strQuarter);
-                            quarterCheck= true;
-                        }else if(strQuarter.equals("0")){
-                            quarterCheck= true;
-                        }else{
+                            quarterCheck = true;
+                        } else if (strQuarter.equals("0")) {
+                            quarterCheck = true;
+                        } else {
                             System.out.println("You input wrong quarter. please repeat or input 0 to go back:");
                         }
 
@@ -95,6 +110,7 @@ public class Launch {
         }
     }
 
+
     private static void filterOnMonth(String enteredMonth) {
 
         System.out.println("selected Month " + enteredMonth);
@@ -104,13 +120,15 @@ public class Launch {
         recordManager.printRecords(records);
         printTOFile(records);
     }
-    private static void filterOnQuarter (String enteredQuarter) {
+
+    private static void filterOnQuarter(String enteredQuarter) {
         System.out.println("Selected Quarter " + enteredQuarter);
         int quarter = Integer.parseInt(enteredQuarter);
         Collection<Record> records = recordManager.filterOnQuarter(quarter);
         recordManager.printRecords(records);
         printTOFile(records);
     }
+
     private static void filterOnYear(String enteredYear) {
 
         System.out.println("Selected Year " + enteredYear);
@@ -128,10 +146,10 @@ public class Launch {
         printTOFile(records);
     }
 
-    private static void printTOFile(Collection<Record> records){
+    private static void printTOFile(Collection<Record> records) {
         Scanner in = new Scanner(System.in);
         System.out.println("Do you want to write into a file? (y/n)");
-        if(in.nextLine().equals("y")){
+        if (in.nextLine().equals("y")) {
             System.out.println("strat to creating a file");
             recordManager.recordsToFile(records);
         }
@@ -142,6 +160,17 @@ public class Launch {
             if (district.equals(dist.getName())) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    private static boolean isMonth(String enteredMonth) {
+        String[] numberOfMonth = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        for (String month : numberOfMonth) {
+            if (enteredMonth.equals(month)) {
+                return true;
+            }
+
         }
         return false;
     }
