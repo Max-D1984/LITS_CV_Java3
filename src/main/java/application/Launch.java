@@ -69,8 +69,11 @@ public class Launch {
         }
     }
 
-    private static void filterOnMonth(String enteredMonth) {
+    //----------------------------------------------------------//
+    //--------Методи виклику фільтрів---------------------------//
+    //----------------------------------------------------------//
 
+    private static void filterOnMonth(String enteredMonth) {
         System.out.println("selected Month " + enteredMonth);
         int month = Integer.parseInt(enteredMonth);
         LocalDate localDate = LocalDate.of(0, month, 1);
@@ -104,6 +107,10 @@ public class Launch {
         printTOFile(records);
     }
 
+    //----------------------------------------------------------//
+    //------------Виклик методу друкування в файл---------------//
+    //----------------------------------------------------------//
+
     private static void printTOFile(Collection<Record> records) {
         Scanner in = new Scanner(System.in);
         System.out.println("Do you want to write into a file? (y/n)");
@@ -112,6 +119,11 @@ public class Launch {
             recordManager.recordsToFile(records);
         }
     }
+
+
+    //----------------------------------------------------------//
+    //--------Виклик методів перевірки введених даних-----------//
+    //----------------------------------------------------------//
 
     private static void isDistrict() {
         Scanner in = new Scanner(System.in);
