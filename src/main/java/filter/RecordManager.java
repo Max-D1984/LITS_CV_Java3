@@ -50,71 +50,27 @@ public class RecordManager {
     public void printRecords(Collection<Record> records) {
         for (Record rec : records) {
             System.out.println(rec.toString());
-
         }
-
     }
 
     public Collection<Record> filterOnYear(LocalDate year) {
-//        List<Record> yearFilter = new LinkedList<>();
-//
-//        for (Record rec : recordList) {
-//            int y = localDate.getYear();
-//            if (rec.getYearMonthDay().getYear() == y) {
-//                yearFilter.add(rec);
-//            }
-//
-//        }
-//        for (Record rec1 : yearFilter) {
-//            System.out.println(rec1.toString());
-//        }
         List<Record> yearFilter = recordList.stream()
                 .filter(y -> y.getYearMonthDay().getYear() == year.getYear())
                 .collect(Collectors.toList());
         return yearFilter;
     }
-//
-//    // метод фільтрації по місяцям.
+    // метод фільтрації по місяцям.
          public Collection<Record> filterOnMonth(LocalDate month) {
-//        // Створюємо колекцію, яка зберігатиме інформацію по якому місяцю відбуваеться фільтрація
-//        List<Record> monthFilter = new LinkedList<>();
-//        // Цикл for, який проходить по значеннях реєстру, де змінна save приймає відповідні значення
-//        for (Record singleLine : recordList) {
-//            // Створюємо цілочисленну змінну та присвоюємо їй значення місяця з аргументу data,який є аргументом методу.
-//            int x = data.getMonthValue();
-//            // умова виконання if:
-//            // виконується порівняння місця зі списку з зазначеним параметром у фільтрі
-//      //if (singleLine.getYearMonthDay().getMonthValue() == x) {
-//        //   monthFilter.add(singleLine);
-//            }
-//        }
-//        //метод повертає заповнену колекцію filterOnMonth із відфільтрованими реєстрами по заданій області.
-//        return monthFilter;
-//    }
-
-
     List<Record> monthFilter = recordList.stream()
             .filter(m -> m.getYearMonthDay().getMonthValue() == month.getMonthValue())
             .collect(Collectors.toList());
         return monthFilter;
 }
 
-
     public Collection<Record> filterOnDistrict(District district) {
-//        List<Record> districtFilter = new LinkedList();
-//        for (Record rec : recordList) {
-//            if (district.equals(rec.getRegion())) {
-//                districtFilter.add(rec);
-//            } else {
-//                continue;
-//            }
-//        }
-
-//
         List<Record> districtFilter = recordList.stream()
                 .filter(x -> x.getRegion().equals(district))
                 .collect(Collectors.toList());
-
         return districtFilter;
     }
 
@@ -127,7 +83,6 @@ public class RecordManager {
                 .filter(r -> r.getYearMonthDay().getMonthValue() <= end)
                 .collect(Collectors.toList());
     }
-
 
     //метод запису відфільтрованих значень у файл. Отримує на вхід колекцію Record
     public void recordsToFile(Collection<Record> recordCollection) {
