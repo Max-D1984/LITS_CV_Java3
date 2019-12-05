@@ -90,24 +90,22 @@ public class RecordManager {
         return monthFilter;
     }
 
-    //метод фільтрації по областям, який повертає змінну типу Collection<Record>, в параметр отримує значення області district
+
     public Collection<Record> filterOnDistrict(District district) {
-        //Створюємо колекцію, котра буде зберігати інформацію про ті реєстри, по чиїй області відбувається фільтрація
-        List<Record> districtFilter = new LinkedList();
-        //В циклі foreach проходимось по всіх значеннях реєстрів, на кожній ітерації змінна rec типу Record
-        //приймає значення відповідної реєстрації
-        for (Record rec : recordList) {
-            //Умова виконання if:
-            //якщо вказана нами область з клавіатури (District district) збігається із областю, яка вказується
-            //в нашому rec на даній ітерації, тоді інформація про реєстрацію на даній інерації закинути в наш створений districtFilter;
-            if (district.equals(rec.getRegion())) {
-                districtFilter.add(rec);
-                //інакше - пропустити цю ітерацію(нічого не виконувати і йти далі)
-            } else {
-                continue;
-            }
-        }
-        //метод повертає заповнену колекцію districtFilter із відфільтрованими реєстрами по заданій області
+//        List<Record> districtFilter = new LinkedList();
+//        for (Record rec : recordList) {
+//            if (district.equals(rec.getRegion())) {
+//                districtFilter.add(rec);
+//            } else {
+//                continue;
+//            }
+//        }
+
+//
+        List<Record> districtFilter = recordList.stream()
+                .filter(x -> x.getRegion().equals(district))
+                .collect(Collectors.toList());
+
         return districtFilter;
     }
 
@@ -141,12 +139,12 @@ public class RecordManager {
 //
 //        }
 
-        int start = (quarter*3)-2;
+        int start = (quarter * 3) - 2;
         int end = start + 2;
         Stream<Record> recordStream = recordList.stream();
         List<Record> quarterFilter = recordStream
-                .filter(r -> r.getYearMonthDay().getMonthValue()>=start)
-                .filter(r -> r.getYearMonthDay().getMonthValue()<=end)
+                .filter(r -> r.getYearMonthDay().getMonthValue() >= start)
+                .filter(r -> r.getYearMonthDay().getMonthValue() <= end)
                 .collect(Collectors.toList());
 
         return quarterFilter;
@@ -165,7 +163,7 @@ public class RecordManager {
         //екземпляр класу FileWriter для запису в файл
 
 
-        try (FileWriter writer = new FileWriter(myFile)){
+        try (FileWriter writer = new FileWriter(myFile)) {
             //створюємо файл
             myFile.createNewFile();
             //змінна логічного типу для визначення чи перший запис для формування назв стовпчиків
