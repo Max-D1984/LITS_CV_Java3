@@ -110,44 +110,13 @@ public class RecordManager {
     }
 
     public Collection<Record> filterOnQuarter(int quarter) {
-//        List<Record> quarterFilter = new LinkedList<>();
-//        int start = 0;
-//        int end = 0;
-//        switch (quarter) {
-//            case 1:
-//                start = 1;
-//                end = 3;
-//                break;
-//            case 2:
-//                start = 4;
-//                end = 6;
-//                break;
-//            case 3:
-//                start = 7;
-//                end = 9;
-//                break;
-//            case 4:
-//                start = 10;
-//                end = 12;
-//                break;
-//        }
-//        for (Record rec : recordList
-//        ) {
-//            if (rec.getYearMonthDay().getMonthValue() >= start && rec.getYearMonthDay().getMonthValue() <= end) {
-//                quarterFilter.add(rec);
-//            }
-//
-//        }
-
         int start = (quarter * 3) - 2;
         int end = start + 2;
-        Stream<Record> recordStream = recordList.stream();
-        List<Record> quarterFilter = recordStream
+
+        return recordList.stream()
                 .filter(r -> r.getYearMonthDay().getMonthValue() >= start)
                 .filter(r -> r.getYearMonthDay().getMonthValue() <= end)
                 .collect(Collectors.toList());
-
-        return quarterFilter;
     }
 
 
