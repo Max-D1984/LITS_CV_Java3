@@ -55,20 +55,22 @@ public class RecordManager {
 
     }
 
-    public Collection<Record> filterOnYear(LocalDate localDate) {
-        List<Record> yearFilter = new LinkedList<>();
-
-        for (Record rec : recordList) {
-            int y = localDate.getYear();
-            if (rec.getYearMonthDay().getYear() == y) {
-                yearFilter.add(rec);
-            }
-
-        }
-        for (Record rec1 : yearFilter) {
-            System.out.println(rec1.toString());
-        }
-
+    public Collection<Record> filterOnYear(LocalDate year) {
+//        List<Record> yearFilter = new LinkedList<>();
+//
+//        for (Record rec : recordList) {
+//            int y = localDate.getYear();
+//            if (rec.getYearMonthDay().getYear() == y) {
+//                yearFilter.add(rec);
+//            }
+//
+//        }
+//        for (Record rec1 : yearFilter) {
+//            System.out.println(rec1.toString());
+//        }
+        List<Record> yearFilter = recordList.stream()
+                .filter(y -> y.getYearMonthDay().getYear() == year.getYear())
+                .collect(Collectors.toList());
         return yearFilter;
     }
 
