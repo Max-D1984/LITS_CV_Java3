@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class RecordManager {
     private List<Record> recordList = new LinkedList<>();
@@ -67,9 +67,9 @@ public class RecordManager {
         return monthFilter;
 }
 
-    public Collection<Record> filterOnDistrict(District district) {
+    public Collection<Record> filterOnDistrict(Predicate<Record> districtPredicate) {
         List<Record> districtFilter = recordList.stream()
-                .filter(x -> x.getRegion().equals(district))
+                .filter(districtPredicate)
                 .collect(Collectors.toList());
         return districtFilter;
     }

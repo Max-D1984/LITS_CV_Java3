@@ -5,6 +5,7 @@ import dto.Record;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public enum FileEnum {
     FILTER_ON_YEAR("isYear"),
@@ -12,36 +13,43 @@ public enum FileEnum {
     FILTER_ON_DISTRICT("isDistrict"),
     FILTER_ON_QUARTER("isQuarter");
 
-    private String method;
     RecordManager recordManager;
-    FileEnum(String method){
+    private String method;
+    private String inputDistrict;
+    Predicate<Record> districtPredicate = x -> x.getRegion().equals(District.getDistrict(inputDistrict));
+
+    FileEnum(String method) {
         this.method = method;
     }
 
-public void filtration(RecordManager recManager){
-        this.recordManager = recManager;
-    switch (method){
-        case "isYear":
-            isYear();
-            break;
-        case "isMonth":
-            isMonth();
-            break;
-        case "isDistrict":
-            isDistrict();
-            break;
-        case "isQuarter":
-            isQuarter();
-            break;
+    public void setInputDistrict(String inputDistrict) {
+        this.inputDistrict = inputDistrict;
     }
-}
+
+    public void filtration(RecordManager recManager) {
+        this.recordManager = recManager;
+        switch (method) {
+            case "isYear":
+                isYear();
+                break;
+            case "isMonth":
+                isMonth();
+                break;
+            case "isDistrict":
+                isDistrict();
+                break;
+            case "isQuarter":
+                isQuarter();
+                break;
+        }
+    }
 
 
     //----------------------------------------------------------//
     //--------Методи виклику фільтрів---------------------------//
     //----------------------------------------------------------//
 
-    private  void filterOnMonth(String enteredMonth) {
+    private void filterOnMonth(String enteredMonth) {
         System.out.println("selected Month " + enteredMonth);
         int month = Integer.parseInt(enteredMonth);
         LocalDate localDate = LocalDate.of(0, month, 1);
@@ -50,7 +58,7 @@ public void filtration(RecordManager recManager){
         printTOFile(records);
     }
 
-    private  void filterOnQuarter(String enteredQuarter) {
+    private void filterOnQuarter(String enteredQuarter) {
         System.out.println("Selected Quarter " + enteredQuarter);
         int quarter = Integer.parseInt(enteredQuarter);
         Collection<Record> records = recordManager.filterOnQuarter(quarter);
@@ -58,7 +66,7 @@ public void filtration(RecordManager recManager){
         printTOFile(records);
     }
 
-    private  void filterOnYear(String enteredYear) {
+    private void filterOnYear(String enteredYear) {
 
         System.out.println("Selected Year " + enteredYear);
         int year = Integer.parseInt(enteredYear);
@@ -68,9 +76,9 @@ public void filtration(RecordManager recManager){
         printTOFile(records);
     }
 
-    private  void filterOnDistrict(String districtName) {
+    private void filterOnDistrict(String districtName, Predicate<Record> districtPredicate) {
         System.out.println("Selected District " + districtName);
-        Collection<Record> records = recordManager.filterOnDistrict(District.getDistrict(districtName));
+        Collection<Record> records = recordManager.filterOnDistrict(districtPredicate);
         recordManager.printRecords(records);
         printTOFile(records);
     }
@@ -79,7 +87,7 @@ public void filtration(RecordManager recManager){
     //------------Виклик методу друкування в файл---------------//
     //----------------------------------------------------------//
 
-    private  void printTOFile(Collection<Record> records) {
+    private void printTOFile(Collection<Record> records) {
         Scanner in = new Scanner(System.in);
         System.out.println("Do you want to write into a file? (y/n)");
         if (in.nextLine().equals("y")) {
@@ -93,24 +101,24 @@ public void filtration(RecordManager recManager){
     //--------Виклик методів перевірки введених даних-----------//
     //----------------------------------------------------------//
 
-    private  void isDistrict() {
+    private void isDistrict() {
         Scanner in = new Scanner(System.in);
         boolean checkDistrict = false;
-        String strDistrict;
+
         while (!checkDistrict) {
-            strDistrict = in.nextLine();
-            if (strDistrict.equals("0")) {
+            setInputDistrict(in.nextLine());
+            if (inputDistrict.equals("0")) {
                 checkDistrict = true;
             } else {
                 for (District dist : District.values()) {
-                    if (strDistrict.equals(dist.getName())) {
+                    if (inputDistrict.equals(dist.getName())) {
                         checkDistrict = true;
                         break;
                     }
                 }
                 if (checkDistrict) {
-                    System.out.println("You did select the next district " + strDistrict);
-                    filterOnDistrict(strDistrict);
+                    System.out.println("You did select the next district " + inputDistrict);
+                    filterOnDistrict(inputDistrict, districtPredicate);
                     break;
                 } else {
                     System.out.println("You input wrong name of District. please repeat or enter 0 to exit:");
@@ -119,7 +127,7 @@ public void filtration(RecordManager recManager){
         }
     }
 
-    private  void isMonth() {
+    private void isMonth() {
         Scanner in = new Scanner(System.in);
         String[] numberOfMonth = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
         String strMonth;
@@ -147,7 +155,7 @@ public void filtration(RecordManager recManager){
         }
     }
 
-    private  void isYear() {
+    private void isYear() {
         Scanner in = new Scanner(System.in);
         String[] numberOfYear = {"2013", "2014", "2015", "2016", "2017", "2018", "2019"};
         String strYear;
@@ -175,7 +183,7 @@ public void filtration(RecordManager recManager){
     }
 
 
-    private  void isQuarter() {
+    private void isQuarter() {
         Scanner in = new Scanner(System.in);
         boolean quarterCheck = false;
         String strQuarter;
