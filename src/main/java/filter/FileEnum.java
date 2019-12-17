@@ -16,7 +16,9 @@ public enum FileEnum {
     RecordManager recordManager;
     private String method;
     private String inputDistrict;
+    private LocalDate localDate;
     Predicate<Record> districtPredicate = x -> x.getRegion().equals(District.getDistrict(inputDistrict));
+    Predicate<Record> yearPredicate = y -> y.getYearMonthDay().getYear() == localDate.getYear();
 
     FileEnum(String method) {
         this.method = method;
@@ -24,6 +26,9 @@ public enum FileEnum {
 
     public void setInputDistrict(String inputDistrict) {
         this.inputDistrict = inputDistrict;
+    }
+    public void setLocalDate(LocalDate localDate) {
+        this.localDate = localDate;
     }
 
     public void filtration(RecordManager recManager) {
@@ -66,12 +71,12 @@ public enum FileEnum {
         printTOFile(records);
     }
 
-    private void filterOnYear(String enteredYear) {
+    private void filterOnYear(String enteredYear, Predicate<Record> yearPredicate) {
 
         System.out.println("Selected Year " + enteredYear);
         int year = Integer.parseInt(enteredYear);
         LocalDate localDate = LocalDate.of(year, 1, 1);
-        Collection<Record> records = recordManager.filterOnYear(localDate);
+        Collection<Record> records = recordManager.filterOnYear(yearPredicate);
         recordManager.printRecords(records);
         printTOFile(records);
     }
@@ -134,6 +139,7 @@ public enum FileEnum {
         boolean checkMonth = false;
         while (!checkMonth) {
             strMonth = in.nextLine();
+
             if (strMonth.equals("0")) {
                 checkMonth = true;
             } else {
@@ -155,6 +161,9 @@ public enum FileEnum {
         }
     }
 
+
+
+
     private void isYear() {
         Scanner in = new Scanner(System.in);
         String[] numberOfYear = {"2013", "2014", "2015", "2016", "2017", "2018", "2019"};
@@ -162,6 +171,8 @@ public enum FileEnum {
         boolean checkYear = false;
         while (!checkYear) {
             strYear = in.nextLine();
+         setLocalDate(LocalDate.of(Integer.parseInt(strYear), 1, 1));
+
             if (strYear.equals("0")) {
                 checkYear = true;
             } else {
@@ -173,7 +184,8 @@ public enum FileEnum {
                 }
                 if (checkYear) {
                     System.out.println("You did select the next year: " + strYear);
-                    filterOnYear(strYear);
+
+                    filterOnYear(strYear, yearPredicate);
                 } else {
                     System.out.println("You did select wrong year, " +
                             "please try again or entered 0 for exit: ");

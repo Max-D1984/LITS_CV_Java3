@@ -53,9 +53,9 @@ public class RecordManager {
         }
     }
 
-    public Collection<Record> filterOnYear(LocalDate year) {
+    public Collection<Record> filterOnYear(Predicate<Record> yearPredicate) {
         List<Record> yearFilter = recordList.stream()
-                .filter(y -> y.getYearMonthDay().getYear() == year.getYear())
+                .filter(yearPredicate)
                 .collect(Collectors.toList());
         return yearFilter;
     }
