@@ -74,13 +74,9 @@ public class RecordManager {
         return districtFilter;
     }
 
-    public Collection<Record> filterOnQuarter(int quarter) {
-        int start = (quarter * 3) - 2;
-        int end = start + 2;
-
+    public Collection<Record> filterOnQuarter(Predicate<Record> quarterPredicate) {
         return recordList.stream()
-                .filter(r -> r.getYearMonthDay().getMonthValue() >= start)
-                .filter(r -> r.getYearMonthDay().getMonthValue() <= end)
+                .filter(quarterPredicate)
                 .collect(Collectors.toList());
     }
 

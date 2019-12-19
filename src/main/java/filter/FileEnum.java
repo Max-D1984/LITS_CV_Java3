@@ -17,6 +17,10 @@ public enum FileEnum {
     private String method;
     private String inputDistrict;
     private LocalDate localDate;
+    private int startMonth;
+    private int endMonth;
+
+    Predicate<Record> quarterPredicate = r -> r.getYearMonthDay().getMonthValue() >= startMonth && r.getYearMonthDay().getMonthValue() <= endMonth;
     Predicate<Record> districtPredicate = x -> x.getRegion().equals(District.getDistrict(inputDistrict));
     Predicate<Record> yearPredicate = y -> y.getYearMonthDay().getYear() == localDate.getYear();
 
@@ -30,6 +34,12 @@ public enum FileEnum {
     public void setLocalDate(LocalDate localDate) {
         this.localDate = localDate;
     }
+
+    public void setStartEndMonth(int start, int end) {
+        this.startMonth = start;
+        this.endMonth = end;
+    }
+
 
     public void filtration(RecordManager recManager) {
         this.recordManager = recManager;
@@ -63,10 +73,9 @@ public enum FileEnum {
         printTOFile(records);
     }
 
-    private void filterOnQuarter(String enteredQuarter) {
+    private void filterOnQuarter(String enteredQuarter, Predicate<Record> quarterPredicate) {
         System.out.println("Selected Quarter " + enteredQuarter);
-        int quarter = Integer.parseInt(enteredQuarter);
-        Collection<Record> records = recordManager.filterOnQuarter(quarter);
+        Collection<Record> records = recordManager.filterOnQuarter(quarterPredicate);
         recordManager.printRecords(records);
         printTOFile(records);
     }
@@ -202,7 +211,9 @@ public enum FileEnum {
         while (!quarterCheck) {
             strQuarter = in.nextLine();
             if (strQuarter.equals("1") || strQuarter.equals("2") || strQuarter.equals("3") || strQuarter.equals("4")) {
-                filterOnQuarter(strQuarter);
+                setStartEndMonth((Integer.parseInt(strQuarter) * 3) - 2, ((Integer.parseInt(strQuarter) * 3) - 2) + 2);
+
+                filterOnQuarter(strQuarter, quarterPredicate);
                 quarterCheck = true;
             } else if (strQuarter.equals("0")) {
                 quarterCheck = true;
