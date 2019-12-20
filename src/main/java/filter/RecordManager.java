@@ -1,16 +1,20 @@
 package filter;
 
 import dto.Record;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 
 public class RecordManager {
     private List<Record> recordList = new LinkedList<>();
@@ -128,6 +132,36 @@ public class RecordManager {
         }
 
     }
+
+
+
+
+    public void recordsToXLSXFile(Collection<Record> recordCollection) {
+        Workbook workbook = new HSSFWorkbook();
+        CreationHelper createHelper = workbook.getCreationHelper();
+        Sheet sheet = workbook.createSheet("Registrations");
+        int rowNum = 0;
+        for (Record record : recordCollection) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(record.getYearMonthDay());
+            row.createCell(1).setCellValue(record.getRegion().toString());
+            row.createCell(2).setCellValue(record.getRegistrationCount());
+        }
+        // Write the output to a file
+        FileOutputStream fileOut = null;
+        try {
+            fileOut = new FileOutputStream("poi-generated-file.xls");
+            workbook.write(fileOut);
+            fileOut.close();
+            // Closing the workbook
+            workbook.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //---------------------------------------------------
     //-------------- Допоміжні методи -------------------
