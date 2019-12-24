@@ -1,0 +1,8 @@
+Insert into Presents (name) values ('Дрон')
+Insert into Presents (name) values ('Два ящика пива')
+Insert into Presents (name) values ('Коробка цукерок')
+Insert into Presents (name) values ('Настільне дзеркало для макіяжу')
+Insert into Presents (name) values ('Мікрофон-караоке')
+Insert into Presents (name) values ('Чохол для телефону')
+Insert into Presents (name) values ('Портативна музична колонка')
+Insert into Presents (name) values ('Настінний годинник')
