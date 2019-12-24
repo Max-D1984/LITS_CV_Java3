@@ -25,7 +25,7 @@ public class Max_SQL_Driver {
     public boolean connectionToBase() {
         boolean connection;
         try {
-            String connectionUrl = "jdbc:sqlserver://" + urlToBase + ";databaseName=" + baseName;
+            String connectionUrl = "jdbc:jtds:sqlserver://" + urlToBase + ";databaseName=" + baseName;
             conn = DriverManager.getConnection(connectionUrl, user, password);
             dbmd = conn.getMetaData();
             stm = conn.createStatement();
