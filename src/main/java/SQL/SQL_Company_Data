@@ -1,0 +1,5 @@
+Insert into Company (Name_Company) values ('МФОКапітал')
+Insert into Company (Name_Company) values ('IT Adeto Company')
+Insert into Company (Name_Company) values ('AutoServ')
+Insert into Company (Name_Company) values ('АльфаДрук')
+Insert into Company (Name_Company) values ('Транспортна компанія IS')
